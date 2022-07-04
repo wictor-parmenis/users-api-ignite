@@ -1,9 +1,9 @@
 {
   "username": "postgres",
-  "password": "docker",
+  "password": "jsnulvonmktoqbtb",
   "type": "postgres",
   "host": "localhost",
-  "port": 5432,
+  "port": 1920,
   "database": "fin_api_db",
   "entities": [
     "./src/modules/**/entities/*.ts"

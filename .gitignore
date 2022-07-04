@@ -3,4 +3,3 @@ node_modules
 coverage
 dist
 .env
-ormconfig.json
