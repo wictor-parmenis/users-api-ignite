@@ -8,11 +8,11 @@ module.exports = {
             "module-resolver",
             {
                 alias: {
-                    "@modules": ["./src/modules"],
-                    "@errors": ["./src/errors"],
-                    "@shared": ["./src/shared"],
-                    "@utils": ["./src/utils"],
-                    "@config": ["./src/config"]
+                    "@modules": "./src/modules",
+                    "@errors": "./src/errors",
+                    "@shared": "./src/shared",
+                    "@utils": "./src/utils",
+                    "@config": "./src/config"
                 }
             }
         ],
