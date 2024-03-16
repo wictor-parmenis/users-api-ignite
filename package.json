@@ -5,10 +5,11 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
-    "start": "npm run build && node dist/server.js",
-    "dev": "ts-node-dev -r tsconfig-paths/register --transpile-only --ignore-watch node_modules --respawn ./src/server.ts",
+    "start": "npm run build && nodemon dist/server.js",
+    "dev": "nodemon --exec ts-node --files --require tsconfig-paths/register --transpile-only ./src/server.ts",
+    "test": "jest --runInBand",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
-    "test": "jest --runInBand"
+    "migrations": "npx typeorm migration:run"
   },
   "dependencies": {
     "@types/nanoid": "^3.0.0",
@@ -54,8 +55,10 @@
     "eslint-plugin-import-helpers": "^1.1.0",
     "eslint-plugin-prettier": "^3.3.1",
     "jest": "^28.1.1",
+    "nodemon": "^3.1.0",
     "supertest": "^6.2.3",
     "ts-jest": "^28.0.4",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^1.1.6",
     "typescript": "^4.2.3"
   }

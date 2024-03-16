@@ -2,15 +2,11 @@
   "username": "postgres",
   "password": "jsnulvonmktoqbtb",
   "type": "postgres",
-  "host": "localhost",
-  "port": 1920,
+  "host": "database",
+  "port": 5432,
   "database": "fin_api_db",
-  "entities": [
-    "./dist/modules/**/entities/*.js"
-  ],
-  "migrations": [
-    "./dist/database/migrations/*.js"
-  ],
+  "entities": ["./dist/modules/**/entities/*.js"],
+  "migrations": ["./dist/database/migrations/*.js"],
   "cli": {
     "migrationsDir": "./src/database/migrations"
   }

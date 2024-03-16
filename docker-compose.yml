@@ -1,4 +1,4 @@
-version: "3.7"
+version: '3.7'
 
 services:
   database:
@@ -6,7 +6,7 @@ services:
     container_name: database_ignite
     restart: always
     ports:
-      - 1920:5432
+      - 5432:5432
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=jsnulvonmktoqbtb
@@ -24,14 +24,14 @@ services:
       - database
     depends_on:
       - database
-  
+
   pgadmin-compose:
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: "placeholder@example.com"
-      PGADMIN_DEFAULT_PASSWORD: "fakepassword123!"
+      PGADMIN_DEFAULT_EMAIL: 'placeholder@example.com'
+      PGADMIN_DEFAULT_PASSWORD: 'fakepassword123!'
     ports:
-      - "16543:80"
+      - '16543:80'
     depends_on:
       - database
 
