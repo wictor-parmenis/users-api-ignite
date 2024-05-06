@@ -7,8 +7,12 @@ COPY package.json  ./
 
 RUN npm install
 
-COPY . .
+RUN sudo apt install postgresql
 
-EXPOSE 3333
+RUN chmod +x /usr/local/bin/check-database-status.sh 
+
+RUN npm run check-db
+
+COPY . .
 
 CMD [ "npm", "run", "start" ]

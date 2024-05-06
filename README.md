@@ -1,3 +1,10 @@
+# Ambiente
+
+- SO: Linux Ubuntu 22.04
+- Node v20.12.2
+- Docker v26.0.1
+- Docker-Compose v1.29.2
+
 # Executando projeto
 
 ## Passo a passo para executar o projeto com o Docker-Compose:
@@ -6,9 +13,7 @@
 2. Solicite o arquivo `.env` para o dono do projeto e ao adquirir ele, coloque-o na raiz do projeto;
 3. Na raiz do projeto execute o comando `docker-compose build`;
 4. Posteriomente, ainda na raiz do projeto, execute `docker-compose up -d`;
-5. Entre no container da API em node com o comando: `docker exec -it  {idDoContainerDaAPINode} /bin/bash`;
-6. Dentro do container execute: `npx typeorm migration:run`.
-7. Passo a passo finalizado, já é possível utilizar as rotas da API.
+5. Passo a passo finalizado, já é possível utilizar as rotas da API.
 
 ## Passo a passo opicional para executar o projeto localmente de modo que o banco de dados execute com o Docker e a API node execute na sua máquina sem uso de conteineres:
 
@@ -51,5 +56,7 @@
 }
 ```
 
-7. Por fim, execute o comando `npm run dev` para iniciar o servidor;
-8. Passo a passo finalizado, já é possível utilizar as rotas da API.
+7. Execute agora o comando: chmod +x /usr/local/bin/check-database-status.sh
+8. Posteriormente execute o comando: npm run check-db
+9. Por fim, execute o comando `npm run dev` para iniciar o servidor;
+10. Passo a passo finalizado, já é possível utilizar as rotas da API.
