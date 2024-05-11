@@ -60,3 +60,8 @@
 8. Posteriormente execute o comando: npm run check-db
 9. Por fim, execute o comando `npm run dev` para iniciar o servidor;
 10. Passo a passo finalizado, já é possível utilizar as rotas da API.
+
+# Outras informações
+
+- Imagem pública no Docker Hub:
+- Porta padrão: 8080
