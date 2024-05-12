@@ -6,12 +6,10 @@ COPY package.json  ./
 
 RUN yarn --verbose
 
-RUN sudo apt install postgresql
-
-RUN chmod +x /usr/local/bin/check-database-status.sh 
-
-RUN yarn check-db
+RUN apk update && apk add postgresql
 
 COPY . .
 
-CMD [ "yarn", "start" ]
+RUN chmod +x check-database-status.sh 
+
+CMD [ "yarn", "run","start" ]
