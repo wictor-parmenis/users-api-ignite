@@ -33,6 +33,16 @@
   #     - database
   #   depends_on:
   #     - database
+
+  # migration-check:
+  #   build: .
+  #   env_file:
+  #     - .env
+  #   links:
+  #     - database
+  #   depends_on:
+  #     - database
+  #   command: ['./check-database-status.sh']
 ```
 
 4. Na raiz do projeto execute o comando `docker-compose build`;
@@ -56,7 +66,7 @@
 }
 ```
 
-7. Execute agora o comando: chmod +x /usr/local/bin/check-database-status.sh
+7. Execute agora o comando: chmod +x check-database-status.sh (caso esteja no linux)
 8. Posteriormente execute o comando: npm run check-db
 9. Por fim, execute o comando `npm run dev` para iniciar o servidor;
 10. Passo a passo finalizado, já é possível utilizar as rotas da API.
