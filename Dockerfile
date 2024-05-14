@@ -12,4 +12,6 @@ COPY . .
 
 RUN chmod +x check-database-status.sh 
 
+ENTRYPOINT [ "./check-database-status.sh" ]
+
 CMD [ "yarn", "run","start" ]

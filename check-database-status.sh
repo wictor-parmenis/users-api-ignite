@@ -14,7 +14,10 @@ SQL_QUERY="SELECT EXISTS (
     AND table_name = 'users'
 );"
 
-
+while ! nc -z database 5432; do
+  echo "Aguardando o banco de dados estar disponível..."
+  sleep 1
+done
 
 result=$(PGPASSWORD="$PASSWORD" psql -h "$HOST" -p "$PORT" -U "$USER" -tAc "$SQL_QUERY")
 

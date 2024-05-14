@@ -35,16 +35,6 @@ services:
     depends_on:
       - database
 
-  # migration-check:
-  #   build: .
-  #   env_file:
-  #     - .env
-  #   links:
-  #     - database
-  #   depends_on:
-  #     - database
-  #   command: ['./check-database-status.sh']
-
 volumes:
   pgdata:
     driver: local
