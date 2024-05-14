@@ -4,9 +4,12 @@ HOST="database"
 PORT="5432"
 USER="postgres"
 PASSWORD="jsnulvonmktoqbtb"
-DATABASE=fin_api_db
+DATABASE="fin_api_db"
 
-# Change SQL query for a select for get users table. Check if exists.
+# Altere este caminho para o executável typeorm, se necessário
+TYPEORM_EXECUTABLE="npx typeorm"
+
+# Consulta SQL para verificar se a tabela "users" existe
 SQL_QUERY="SELECT EXISTS (
     SELECT 1 
     FROM information_schema.tables 
@@ -14,16 +17,18 @@ SQL_QUERY="SELECT EXISTS (
     AND table_name = 'users'
 );"
 
-while ! nc -z database 5432; do
+# Aguardar até que o banco de dados esteja disponível
+while ! nc -z "$HOST" "$PORT"; do
   echo "Aguardando o banco de dados estar disponível..."
   sleep 1
 done
 
-result=$(PGPASSWORD="$PASSWORD" psql -h "$HOST" -p "$PORT" -U "$USER" -tAc "$SQL_QUERY")
+# Executar a consulta SQL e verificar o resultado
+result=$(PGPASSWORD="$PASSWORD" psql -h "$HOST" -p "$PORT" -U "$USER" -d "$DATABASE" -tAc "$SQL_QUERY")
 
-if [ -n "$result" ]; then
-    echo "Is not need execute migration."
+if [ "$result" = "t" ]; then
+    echo "Not need migration."
 else
     echo "Executing migration..."
-    npx typeorm migration:run
+    $TYPEORM_EXECUTABLE migration:run
 fi
