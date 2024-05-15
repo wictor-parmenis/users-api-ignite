@@ -30,5 +30,6 @@ if [ "$result" = "t" ]; then
     echo "Not need migration."
 else
     echo "Executing migration..."
+    sleep 90
     $TYPEORM_EXECUTABLE migration:run
 fi
