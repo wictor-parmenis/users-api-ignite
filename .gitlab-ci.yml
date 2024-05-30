@@ -15,4 +15,4 @@ build image:
 deploy:
   stage: deploy
   script:
-    - docker-compose up
+    - docker-compose up -d
