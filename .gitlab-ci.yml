@@ -15,11 +15,16 @@ variables:
   DOCKER_HOST: tcp://docker:2375/
   DOCKER_DRIVER: overlay2
 
+after_script:
+  - whoami
+  - docker ps
+
 build:
   stage: build
   script:
+    - docker-compose down
     - docker-compose build
-# deploy:
-#   stage: deploy
-#   script:
-#     - docker-compose up -d
+deploy:
+  stage: deploy
+  script:
+    - docker-compose up -d
