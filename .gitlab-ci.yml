@@ -3,9 +3,8 @@ stages:
   - deploy
 
 image: docker:latest
-
 services:
-  - docker:19.03.12
+  - 'docker:dind'
 
 variables:
   DOCKER_HOST: tcp://docker:2375/
