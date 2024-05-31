@@ -1,25 +1,15 @@
-stages:
-  - build
-  - deploy
+image: tmaier/docker-compose:latest
 
-image: docker:latest
 services:
-  - 'docker:dind'
+  - docker:dind
 
 before_script:
   - docker info
   - docker-compose --version
 
-variables:
-  DOCKER_HOST: tcp://docker:2375/
-  DOCKER_DRIVER: overlay2
-
-build:
+buildJob:
   stage: build
+  tags:
+    - docker
   script:
     - docker-compose build
-
-deploy:
-  stage: deploy
-  script:
-    - docker-compose up -d
