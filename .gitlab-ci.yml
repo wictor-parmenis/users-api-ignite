@@ -2,9 +2,12 @@ stages:
   - build
   - deploy
 
-image: docker:latest
 services:
-  - 'docker:dind'
+  - docker:19.03.12-dind
+
+before_script:
+  - docker info
+  - docker-compose --version
 
 variables:
   DOCKER_HOST: tcp://docker:2375/
