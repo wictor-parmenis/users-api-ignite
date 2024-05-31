@@ -2,6 +2,8 @@ stages:
   - build
   - deploy
 
+image: docker:latest
+
 services:
   - docker:19.03.12
 
