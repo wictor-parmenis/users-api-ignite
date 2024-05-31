@@ -2,8 +2,9 @@ stages:
   - build
   - deploy
 
+image: docker:latest
 services:
-  - docker:19.03.12-dind
+  - 'docker:dind'
 
 before_script:
   - docker info
