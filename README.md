@@ -7,7 +7,7 @@
 
 # Executando projeto
 
-## Passo a passo para executar o projeto com o Docker-Compose:
+## Passo a passo para executar o projeto com o Docker-Compose
 
 1. Certifique-se de ter o `node.js`, `docker` e o `docker-compose` na sua máquina;
 2. Solicite o arquivo `.env` para o dono do projeto e ao adquirir ele, coloque-o na raiz do projeto;
@@ -15,7 +15,9 @@
 4. Posteriomente, ainda na raiz do projeto, execute `docker-compose up -d`;
 5. Passo a passo finalizado, já é possível utilizar as rotas da API.
 
-## Passo a passo opicional para executar o projeto localmente de modo que o banco de dados execute com o Docker e a API node execute na sua máquina sem uso de conteineres:
+- todo: adicionar automação do start do servidor redis ao iniciar aplicação;
+
+## Passo a passo opicional para executar o projeto localmente de modo que o banco de dados execute com o Docker e a API node execute na sua máquina sem uso de conteineres
 
 1. Certifique-se de ter o `node.js`, `docker` e o `docker-compose` na sua máquina;
 2. Solicite o arquivo `.env` para o dono do projeto;
@@ -66,10 +68,21 @@
 }
 ```
 
-7. Execute agora o comando: chmod +x check-database-status.sh (caso esteja no linux)
-8. Posteriormente execute o comando: npm run check-db
-9. Por fim, execute o comando `npm run dev` para iniciar o servidor;
-10. Passo a passo finalizado, já é possível utilizar as rotas da API.
+7. Altere também o host no arquivo check-database-status.sh:
+
+```ssh
+HOST="localhost"  # antes era "database"
+PORT="5432"
+USER="postgres"
+PASSWORD="jsnulvonmktoqbtb"
+DATABASE="fin_api_db"
+```
+
+8. Execute o comando: npm run init:redis;
+9. Execute agora o comando: chmod +x check-database-status.sh (caso esteja no linux)
+10. Posteriormente execute o comando: ´./check-database-status.sh´
+11. Por fim, execute o comando `npm run start` para iniciar o servidor;
+12. Passo a passo finalizado, já é possível utilizar as rotas da API.
 
 # Outras informações
 
