@@ -1,10 +1,10 @@
-import Redis from 'ioredis';
+import { titlesCaches } from '@config/titlesCaches';
 import { inject, injectable } from 'tsyringe';
+import { redisPreConfigured } from '../../../../cache-mgmt/cacheMgmtConfig';
 import { IUsersRepository } from '../../../users/repositories/IUsersRepository';
 import { Statement } from '../../entities/Statement';
 import { IStatementsRepository } from '../../repositories/IStatementsRepository';
 import { GetBalanceError } from './GetBalanceError';
-const redis = new Redis();
 interface IRequest {
   user_id: string;
 }
@@ -36,7 +36,12 @@ export class GetBalanceUseCase {
       with_statement: true,
     });
 
-    await redis.set('user-balance-cache', JSON.stringify(balance), 'EX', 3600); // Cache for 1 hour
+    await redisPreConfigured.set(
+      titlesCaches.USER_BALANCE,
+      JSON.stringify(balance),
+      'EX',
+      3600
+    ); // Cache for 1 hour
 
     return balance as IResponse;
   }

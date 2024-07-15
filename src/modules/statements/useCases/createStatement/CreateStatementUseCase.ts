@@ -1,9 +1,11 @@
-import { inject, injectable } from "tsyringe";
+import { inject, injectable } from 'tsyringe';
 
-import { IUsersRepository } from "../../../users/repositories/IUsersRepository";
-import { IStatementsRepository } from "../../repositories/IStatementsRepository";
-import { CreateStatementError } from "./CreateStatementError";
-import { ICreateStatementDTO } from "./ICreateStatementDTO";
+import { titlesCaches } from '@config/titlesCaches';
+import { redisPreConfigured } from '../../../../cache-mgmt/cacheMgmtConfig';
+import { IUsersRepository } from '../../../users/repositories/IUsersRepository';
+import { IStatementsRepository } from '../../repositories/IStatementsRepository';
+import { CreateStatementError } from './CreateStatementError';
+import { ICreateStatementDTO } from './ICreateStatementDTO';
 
 @injectable()
 export class CreateStatementUseCase {
@@ -18,15 +20,17 @@ export class CreateStatementUseCase {
   async execute({ user_id, type, amount, description }: ICreateStatementDTO) {
     const user = await this.usersRepository.findById(user_id);
 
-    if(!user) {
+    if (!user) {
       throw new CreateStatementError.UserNotFound();
     }
-    
-    if(type === 'withdraw') {
-      const { balance } = await this.statementsRepository.getUserBalance({ user_id });
+
+    if (type === 'withdraw') {
+      const { balance } = await this.statementsRepository.getUserBalance({
+        user_id,
+      });
 
       if (balance < amount) {
-        throw new CreateStatementError.InsufficientFunds()
+        throw new CreateStatementError.InsufficientFunds();
       }
     }
 
@@ -34,9 +38,13 @@ export class CreateStatementUseCase {
       user_id,
       type,
       amount,
-      description
+      description,
     });
+
+    await redisPreConfigured.del(titlesCaches.USER_BALANCE);
 
     return statementOperation;
   }
+
+  async cleanBalanceUserCache() {}
 }

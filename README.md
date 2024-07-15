@@ -15,8 +15,6 @@
 4. Posteriomente, ainda na raiz do projeto, execute `docker-compose up -d`;
 5. Passo a passo finalizado, já é possível utilizar as rotas da API.
 
-- todo: adicionar automação do start do servidor redis ao iniciar aplicação;
-
 ## Passo a passo opicional para executar o projeto localmente de modo que o banco de dados execute com o Docker e a API node execute na sua máquina sem uso de conteineres
 
 1. Certifique-se de ter o `node.js`, `docker` e o `docker-compose` na sua máquina;
@@ -36,39 +34,14 @@
   #   depends_on:
   #     - database
 
-  # migration-check:
-  #   build: .
-  #   env_file:
-  #     - .env
-  #   links:
-  #     - database
-  #   depends_on:
-  #     - database
-  #   command: ['./check-database-status.sh']
 ```
 
 4. Na raiz do projeto execute o comando `docker-compose build`;
 5. Posteriomente, ainda na raiz do projeto, execute `docker-compose up -d` e assim o banco de dados e o portal admin do Postgres estará executando perfeitamente;
 6. No seu shell, e na raiz do projeto, execute `npm i` para instalar as dependências;
-7. Ainda na raiz do projeto, altere o valor da chave `host` do arquivo `ormconfig.json` para `localhost`.
+7. Ainda na raiz do projeto, altere o valor da chave `STAGE` do arquivo `.env` para `local`.
 
-```
-{
-  "username": "postgres",
-  "password": "jsnulvonmktoqbtb",
-  "type": "postgres",
-  "host": "localhost",  // antes era "database"
-  "port": 5432,
-  "database": "fin_api_db",
-  "entities": ["./dist/modules/**/entities/*.js"],
-  "migrations": ["./dist/database/migrations/*.js"],
-  "cli": {
-    "migrationsDir": "./src/database/migrations"
-  }
-}
-```
-
-7. Altere também o host no arquivo check-database-status.sh:
+8. Altere também o host no arquivo check-database-status.sh:
 
 ```ssh
 HOST="localhost"  # antes era "database"
@@ -78,13 +51,18 @@ PASSWORD="jsnulvonmktoqbtb"
 DATABASE="fin_api_db"
 ```
 
-8. Execute o comando: npm run init:redis;
+- E altere o arquivo ormconfig.json, altere o campo host para `localhost` ao invés de database.
+
 9. Execute agora o comando: chmod +x check-database-status.sh (caso esteja no linux)
 10. Posteriormente execute o comando: ´./check-database-status.sh´
-11. Por fim, execute o comando `npm run start` para iniciar o servidor;
+11. Por fim, execute o comando `npm run start:no-migration` para iniciar o servidor;
 12. Passo a passo finalizado, já é possível utilizar as rotas da API.
 
 # Outras informações
 
 - Imagem pública no Docker Hub:
 - Porta padrão: 8080
+
+# Helper
+
+- Caso alguma coisa saia do controle, tente remover todos os volumes, imagens e containers com esse comando: `docker system prune -a --volumes`. E posteriormente reinicie a aplicação.
