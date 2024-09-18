@@ -3,17 +3,20 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
-  PrimaryGeneratedColumn
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
+import { StatementTags } from '@modules/statement-tag/entities/StatementTag';
 import { User } from '../../users/entities/User';
 
 export enum OperationType {
   DEPOSIT = 'deposit',
   WITHDRAW = 'withdraw',
-  TRANSFER = 'transfer'
+  TRANSFER = 'transfer',
 }
 
 @Entity('statements')
@@ -24,9 +27,20 @@ export class Statement {
   @Column('uuid')
   user_id: string;
 
-  @ManyToOne(() => User, user => user.statement)
+  @Column('uuid')
+  tag_id: string;
+
+  @ManyToOne(() => User, (user) => user.statement)
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @ManyToMany(() => StatementTags)
+  @JoinTable({
+    name: 'statement_tags',
+    joinColumn: { name: 'statement_id', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'tag_id', referencedColumnName: 'id' },
+  })
+  tags: StatementTags[];
 
   @Column()
   description: string;

@@ -66,3 +66,14 @@ DATABASE="fin_api_db"
 # Helper
 
 - Caso alguma coisa saia do controle, tente remover todos os volumes, imagens e containers com esse comando: `docker system prune -a --volumes`. E posteriormente reinicie a aplicação.
+
+## Entrando no banco de dados da aplicação
+
+1. Certifique-se de que o container do banco de dados está executando.
+2. Execute `docker exec -it <DB_CONTAINER> /bin/bash` para entrar no container.
+3. Execute `psql -U postgres -d fin_api_db` para entrar no banco de dados.
+
+## Migrations
+
+1. Execute o comando: `npx typeorm migration:create -N <NameOfMigration>` para criar uma migration;
+2. Execute `npm run build && npx typeorm migration:run` ou `npm run migrations` para executar migrations;

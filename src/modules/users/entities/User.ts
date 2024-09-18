@@ -9,6 +9,8 @@ import {
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
+import { Account } from '@modules/accounts/entities/Account';
+import { StatementTags } from '@modules/statement-tag/entities/StatementTag';
 import { Status } from '@modules/status/entities/Status';
 import { Statement } from '../../statements/entities/Statement';
 
@@ -35,6 +37,12 @@ export class User {
 
   @OneToMany(() => Statement, (statement) => statement.user)
   statement: Statement[];
+
+  @OneToMany(() => Account, (account) => account.user)
+  account: Account[];
+
+  @OneToMany(() => StatementTags, (statementTag) => statementTag.user)
+  statement_tag: StatementTags[];
 
   @CreateDateColumn()
   created_at: Date;

@@ -12,7 +12,8 @@
     "test": "jest --runInBand",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
     "migrations": "npm run build && npx typeorm migration:run",
-    "init:redis": "docker run --name redis -p 6379:6379 -d redis"
+    "init:redis": "docker run --name redis -p 6379:6379 -d redis",
+    "backup:db": "./upsert-backup.sh"
   },
   "dependencies": {
     "@types/nanoid": "^3.0.0",
