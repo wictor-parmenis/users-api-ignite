@@ -73,7 +73,9 @@ DATABASE="fin_api_db"
 2. Execute `docker exec -it <DB_CONTAINER> /bin/bash` para entrar no container.
 3. Execute `psql -U postgres -d fin_api_db` para entrar no banco de dados.
 
+Obs: limpando o shell - `\! clear` .
+
 ## Migrations
 
-1. Execute o comando: `npx typeorm migration:create -N <NameOfMigration>` para criar uma migration;
+1. Execute o comando: `npx typeorm migration:create -n <NameOfMigration>` para criar uma migration;
 2. Execute `npm run build && npx typeorm migration:run` ou `npm run migrations` para executar migrations;
