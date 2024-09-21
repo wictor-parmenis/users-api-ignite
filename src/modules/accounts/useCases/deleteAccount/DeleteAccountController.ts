@@ -9,8 +9,6 @@ export class DeleteAccountController {
 
     const deleteAccount = container.resolve(DeleteAccountUseCase);
 
-    console.log('account_id', account_id);
-
     await deleteAccount.execute({
       id: account_id,
       user_id,

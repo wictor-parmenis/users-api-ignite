@@ -39,8 +39,6 @@ export class AccountsRepository implements IAccountRepository {
   }
 
   async delete(id: string): Promise<void> {
-    console.log('id repository', id);
-
     await this.repository.delete(id);
   }
 
