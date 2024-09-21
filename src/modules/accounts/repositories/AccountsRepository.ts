@@ -32,7 +32,15 @@ export class AccountsRepository implements IAccountRepository {
     return this.repository.findOne(id);
   }
 
+  async findByTitle(title: string) {
+    return this.repository.findOne({
+      title,
+    });
+  }
+
   async delete(id: string): Promise<void> {
+    console.log('id repository', id);
+
     await this.repository.delete(id);
   }
 

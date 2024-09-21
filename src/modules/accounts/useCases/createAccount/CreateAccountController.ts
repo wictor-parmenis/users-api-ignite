@@ -4,7 +4,7 @@ import { container } from 'tsyringe';
 import { CreateAccountUseCase } from './CreateAccountUseCase';
 
 export class CreateAccountController {
-  async execute(request: Request, response: Response) {
+  async create(request: Request, response: Response) {
     const { id: user_id } = request.user;
     const { amount, description, title, icon } = request.body;
 

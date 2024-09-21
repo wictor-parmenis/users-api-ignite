@@ -28,6 +28,13 @@ export class CreateAccountUseCase {
       throw new CreateAccountError.UserNotFound();
     }
 
+    const accountAlreadyExists =
+      await this.accountsRepository.findByTitle(title);
+
+    if (accountAlreadyExists) {
+      throw new CreateAccountError.AccountAlreadyExists();
+    }
+
     const createAccountResult = await this.accountsRepository.create({
       user_id,
       icon,

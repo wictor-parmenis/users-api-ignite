@@ -11,11 +11,15 @@ export class DeleteAccountUseCase {
     private accountsRepository: IAccountRepository
   ) {}
 
-  async execute({ id }: IDeleteAccountDTO): Promise<void> {
+  async execute({ id, user_id }: IDeleteAccountDTO): Promise<void> {
     const account = await this.accountsRepository.findById(id);
 
     if (!account) {
       throw new DeleteAccountError.AccountNotFound();
+    }
+
+    if (account.user_id !== user_id) {
+      throw new DeleteAccountError.UserNotAllowed();
     }
 
     const deleteAccountResult = await this.accountsRepository.delete(id);

@@ -6,4 +6,9 @@ export namespace CreateAccountError {
       super('User not found', 404);
     }
   }
+  export class AccountAlreadyExists extends AppError {
+    constructor() {
+      super('Account already exists', 400);
+    }
+  }
 }
