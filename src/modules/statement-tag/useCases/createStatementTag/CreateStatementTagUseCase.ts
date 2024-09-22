@@ -1,5 +1,5 @@
 import { StatementTags } from '@modules/statement-tag/entities/StatementTag';
-import { IStatementTagRepository } from '@modules/statement-tag/repositories/IStatementTagRepository';
+import { IStatementTagsRepository } from '@modules/statement-tag/repositories/IStatementTagsRepository';
 import { inject, injectable } from 'tsyringe';
 import { CreateStatementTagError } from './CreateStatementTagError';
 import { ICreateStatementTagDTO } from './ICreateStatementTagDTO';
@@ -7,8 +7,8 @@ import { ICreateStatementTagDTO } from './ICreateStatementTagDTO';
 @injectable()
 export class CreateStatementTagUseCase {
   constructor(
-    @inject('StatementTagRepository')
-    private statementTagRepository: IStatementTagRepository
+    @inject('StatementTagsRepository')
+    private statementTagRepository: IStatementTagsRepository
   ) {}
 
   async execute({

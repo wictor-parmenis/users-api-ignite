@@ -8,6 +8,8 @@ import { StatementsRepository } from '../../modules/statements/repositories/Stat
 
 import { AccountsRepository } from '@modules/accounts/repositories/AccountsRepository';
 import { IAccountRepository } from '@modules/accounts/repositories/IAccountsRepository';
+import { IStatementTagsRepository } from '@modules/statement-tag/repositories/IStatementTagsRepository';
+import { StatementTagsRepository } from '@modules/statement-tag/repositories/StatementTagsRepository';
 import { IUsersTokensRepository } from '../../modules/users/repositories/IUsersTokensRepository';
 import { UsersTokensRepository } from '../../modules/users/repositories/UsersTokensRepository';
 
@@ -29,4 +31,9 @@ container.registerSingleton<IUsersTokensRepository>(
 container.registerSingleton<IAccountRepository>(
   'AccountsRepository',
   AccountsRepository
+);
+
+container.registerSingleton<IStatementTagsRepository>(
+  'StatementTagsRepository',
+  StatementTagsRepository
 );

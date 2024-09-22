@@ -3,6 +3,7 @@ import { Router } from 'express';
 import { accountsRouter } from './accounts.routes';
 import { authenticationRouter } from './authentication.routes';
 import { statementRouter } from './statements.routes';
+import { statementTagsRouter } from './statementTags';
 import { userProfileRouter } from './userProfile.routes';
 import { usersRouter } from './users.routes';
 
@@ -15,5 +16,6 @@ router.use('/profile', userProfileRouter);
 router.use('/accounts', accountsRouter);
 
 router.use('/statements', statementRouter);
+router.use('/statement-tags', statementTagsRouter);
 
 export { router };
