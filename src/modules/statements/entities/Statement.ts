@@ -3,14 +3,12 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
-import { StatementTags } from '@modules/statement-tag/entities/StatementTag';
+import { Account } from '@modules/accounts/entities/Account';
 import { User } from '../../users/entities/User';
 
 export enum OperationType {
@@ -34,14 +32,6 @@ export class Statement {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @ManyToMany(() => StatementTags)
-  @JoinTable({
-    name: 'statement_tags',
-    joinColumn: { name: 'statement_id', referencedColumnName: 'id' },
-    inverseJoinColumn: { name: 'tag_id', referencedColumnName: 'id' },
-  })
-  tags: StatementTags[];
-
   @Column()
   description: string;
 
@@ -50,6 +40,13 @@ export class Statement {
 
   @Column({ type: 'enum', enum: OperationType })
   type: OperationType;
+
+  @ManyToOne(() => Account, (account) => account.statements)
+  @JoinColumn({ name: 'account_id' })
+  account: Account;
+
+  @Column('uuid', { nullable: false })
+  account_id: string;
 
   @CreateDateColumn()
   created_at: Date;

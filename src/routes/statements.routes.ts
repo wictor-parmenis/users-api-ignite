@@ -1,6 +1,5 @@
 import { Router } from 'express';
 
-import { checkCache } from '@shared/infra/http/middlewares/checkCache';
 import { CreateStatementController } from '../modules/statements/useCases/createStatement/CreateStatementController';
 import { GetBalanceController } from '../modules/statements/useCases/getBalance/GetBalanceController';
 import { GetStatementOperationController } from '../modules/statements/useCases/getStatementOperation/GetStatementOperationController';
@@ -13,7 +12,11 @@ const getStatementOperationController = new GetStatementOperationController();
 
 statementRouter.use(ensureAuthenticated);
 
-statementRouter.get('/balance', checkCache, getBalanceController.execute);
+statementRouter.get(
+  '/balance/:account_id',
+  //checkCache,
+  getBalanceController.execute
+);
 statementRouter.post('/deposit', createStatementController.execute);
 statementRouter.post('/withdraw', createStatementController.execute);
 statementRouter.get('/:statement_id', getStatementOperationController.execute);

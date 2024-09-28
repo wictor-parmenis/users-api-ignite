@@ -3,13 +3,11 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
-import { Statement } from '@modules/statements/entities/Statement';
 import { User } from '@modules/users/entities/User';
 
 @Entity('statement_tags')
@@ -27,8 +25,7 @@ export class StatementTags {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @ManyToMany(() => Statement, (statement) => statement.tags)
-  statements: Statement[];
+  // TODO: add URL ICON column
 
   @CreateDateColumn()
   created_at: Date;

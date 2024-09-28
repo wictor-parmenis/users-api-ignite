@@ -1,7 +1,15 @@
-import { AppError } from "../../../../shared/errors/AppError";
+import { AppError } from '../../../../shared/errors/AppError';
 
-export class GetBalanceError extends AppError {
-  constructor() {
-    super('User not found', 404);
+export namespace GetBalanceError {
+  export class UserNotFound extends AppError {
+    constructor() {
+      super('User not found', 404);
+    }
+  }
+
+  export class AccountNotFound extends AppError {
+    constructor() {
+      super('Account not found', 404);
+    }
   }
 }

@@ -15,4 +15,5 @@ export interface IStatementsRepository {
   ) => Promise<
     { balance: number } | { balance: number; statement: Statement[] }
   >;
+  findStatementByTag: (tag_id: string) => Promise<Statement[]>;
 }

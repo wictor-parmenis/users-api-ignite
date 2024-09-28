@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { accountsRouter } from './accounts.routes';
 import { authenticationRouter } from './authentication.routes';
 import { statementRouter } from './statements.routes';
-import { statementTagsRouter } from './statementTags';
+import { statementTagsRouter } from './statementTags.routes';
 import { userProfileRouter } from './userProfile.routes';
 import { usersRouter } from './users.routes';
 

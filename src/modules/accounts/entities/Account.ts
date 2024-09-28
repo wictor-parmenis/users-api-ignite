@@ -4,10 +4,12 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
+import { Statement } from '@modules/statements/entities/Statement';
 import { User } from '../../users/entities/User';
 
 @Entity('accounts')
@@ -27,6 +29,9 @@ export class Account {
 
   @Column()
   description: string;
+
+  @OneToMany(() => Statement, (statement) => statement.account)
+  statements: Statement[];
 
   @Column()
   icon: string;

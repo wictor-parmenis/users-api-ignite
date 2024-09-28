@@ -12,18 +12,21 @@ export class StatementsRepository implements IStatementsRepository {
   constructor() {
     this.repository = getRepository(Statement);
   }
+  findStatementByTag: (tag_id: string) => Promise<Statement[]>;
 
   async create({
     user_id,
     amount,
     description,
     type,
+    account_id,
   }: ICreateStatementDTO): Promise<Statement> {
     const statement = this.repository.create({
       user_id,
       amount,
       description,
       type,
+      account_id,
     });
 
     return this.repository.save(statement);
@@ -32,6 +35,14 @@ export class StatementsRepository implements IStatementsRepository {
   async findById(statement_id: string): Promise<Statement | undefined> {
     const statement = await this.repository.findOne(statement_id);
     return statement;
+  }
+
+  async findStatementByTagId(tag_id: string): Promise<Statement[]> {
+    return this.repository.find({
+      where: {
+        tag_id,
+      },
+    });
   }
 
   async save(statement: Statement): Promise<Statement> {
@@ -51,11 +62,12 @@ export class StatementsRepository implements IStatementsRepository {
   async getUserBalance({
     user_id,
     with_statement = false,
+    account_id,
   }: IGetBalanceDTO): Promise<
     { balance: number } | { balance: number; statement: Statement[] }
   > {
     const statement = await this.repository.find({
-      where: { user_id },
+      where: { user_id, account_id },
     });
 
     const balance = statement.reduce((acc, operation) => {

@@ -36,7 +36,6 @@ export class UpdateStatementTagUseCase {
     const statementTag = await this.statementTagRepository.update({
       description,
       created_at: statementTagExists.created_at,
-      statements: statementTagExists.statements,
       updated_at: new Date(),
       user_id: statementTagExists.user_id,
       user: statementTagExists.user,
